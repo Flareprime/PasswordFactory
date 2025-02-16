@@ -6,6 +6,12 @@ CS236 - Advanced OOP (Java 2)
 Final Project: Strong Password Creation Game for Kids  
 Updated circa February 16, 2025
 
+## Specs
+Java: 23.0.2
+Apache NetBeans IDE 24
+JavaFX 23
+Java with Maven, Simple JavaFX Maven Archetype
+
 ## Overview
 Password Factory is a Java-based educational game designed to teach kids how to create **strong passwords**.  
 Players work in a "password factory," assembling secure passwords under **time pressure** while avoiding weak patterns.  
@@ -30,6 +36,6 @@ This project is part of **CS236 Advanced OOP (Java 2)** and follows these requir
 - NetBeans (or any Java IDE)  
 
 ### Running the Game
-   https://github.com/yFlareprime/PasswordFactory.git
+  https://github.com/Flareprime/PasswordFactory
    run App.java
    or run PaswordValidatorTest.java for ... the tests

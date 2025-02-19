@@ -12,6 +12,7 @@ X add java/javaFX specs to readme and App.java. Maybe an About screen
 - Update Password Factory Classes, Variables, and Methods document with variables/methods we actually used
 - and UML
 - remove System.out.println() debugging stuff, or do a Global debug mode flag 
+- “View Saved Passwords” button
 
 ## Password Validation
 - Make password validation smarter (avoid common substitutions like "P@ssword1")

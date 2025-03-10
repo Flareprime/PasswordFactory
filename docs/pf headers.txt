@@ -1,0 +1,16 @@
+/*  Lizbeth Garcia-Lopez & Jordan Bassett   
+    Password Factory
+    CS236 - Advanced OOP (Java 2)
+    Updated circa February 17, 2025
+    PasswordGame.java: This class handles the core gameplay for Password Factory.
+    Players enter a password within a time limit, and the game evaluates its strength. The game also provides feedback and scoring based on password quality.
+    - Displays a password entry field.
+    - Validates passwords using PasswordValidator.java.
+    - Provides feedback on password strength (Weak, Moderate, Strong).
+    - Tracks difficulty level and adjusts game settings accordingly.
+    - Allows returning to the main menu.
+
+    - Called from: GameSetupScreen.java (when "Start Game" is clicked).
+    - Uses: PasswordValidator.java to check password strength.
+    - Returns to: App.java (when "Back to Main Menu" is clicked).
+*/

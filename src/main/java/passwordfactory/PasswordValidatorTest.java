@@ -1,45 +1,74 @@
-/*  Lizbeth Garcia-Lopez & Jordan Bassett   
-    Password Factory
-    CS236 - Advanced OOP (Java 2)
-    Final Project: Strong Password Creation Game for Kids
-    Updated circa February 16, 2025
-    Desc: This is a test program for validating passwords using the PasswordValidator class.
-    It runs multiple test cases and prints out the password strength and feedback.
+/* Password Factory Project
+ CS236 - Advanced OOP (Java 2)
+ Class: PasswordValidatorTest.java
+ Author(s): Lizbeth Garcia-Lopez & Jordan Bassett
+ Last Updated: March 16, 2025
+ 
+ Description:
+    Early test class for validating the PasswordValidator logic.
+    Runs a set of predefined passwords through the validator and prints
+    their strength ratings and feedback to the console.
 
-    - Uses PasswordValidator to evaluate password strength.
-    - Tests a set of predefined passwords.
-    - Prints the password strength score and feedback.
-    - Runs independently from the main game UI.
-*/
+ Features:
+    - Tests PasswordValidator against a variety of sample passwords
+    - Displays strength ratings and improvement feedback
+    - Demonstrates different difficulty settings
+
+ Dependencies:
+    - Uses: PasswordValidator.java, PasswordFileManager.java
+ */
 
 package passwordfactory;
-public class PasswordValidatorTest
+
+//Early console-based test class for validating PasswordValidator.
+//outputs strength evaluations and feedback for predefined passwords.
+ public class PasswordValidatorTest
 {
-    /* Main method that runs the password validation tests.
-     * @param args Command-line arguments (not used).  */
     public static void main(String[] args)
     {
-        //Create an instance of the PasswordValidator
-        PasswordValidator validator = new PasswordValidator();
+        //Create file manager for test environment
+        PasswordFileManager fileManager = new PasswordFileManager("phrases.txt", "password_log.txt");
 
-        //array of test passwords to evaluate
-        String[] testPasswords = 
-        {
-            "123456",            // Weak: Too short, no variety
-            "Password123!",      // Moderate: Common pattern but has variety
-            "HelloWorld!",       // Weak: Common phrase, lacks numbers
-            "Str0ngP@ss!",       // Strong: Good length and character mix
-            "SuperSecure2025!",  // Strong: Long, diverse characters
-            "qwerty1234"         // Weak: Common sequence
+        //Create validator using file manager and set difficulty (easy/medium/hard)
+        String difficulty = "medium"; // Change this to test other difficulties
+        PasswordValidator validator = new PasswordValidator(fileManager, difficulty);
+
+        // Array of test passwords to evaluate
+        String[] testPasswords = {
+            "123456",            // Weak
+            "Password123!",      // Moderate (common word)
+            "HelloWorld!",       // Moderate
+            "Str0ngP@ss!",       // Strong
+            "SupermanLives!1",   // Moderate (common word!)
+            "qwerty1234"         // Weak (common word)
         };
 
-        //Loop through each password and print evaluation results
+        System.out.println("Testing Passwords in '" + difficulty + "' Mode");
+        System.out.println("==========================================");
+
+        //loop through each password and print evaluation results
         for (String pw : testPasswords)
         {
             System.out.println("Testing: " + pw);
-            System.out.println("Score: " + validator.checkStrength(pw)); // Prints numeric strength score
-            System.out.println("Feedback: " + validator.giveFeedback(pw)); // Prints password improvement feedback
-            System.out.println("------------");
+            int score = validator.checkStrength(pw);
+            String feedback = validator.giveFeedback(pw);
+            String strengthLabel;
+            switch (score)
+            {
+                case 2:
+                    strengthLabel = "Strong";
+                    break;
+                case 1:
+                    strengthLabel = "Moderate";
+                    break;
+                default:
+                    strengthLabel = "Weak";
+                    break;
+            }
+
+            System.out.println("Strength: " + strengthLabel + " (Score: " + score + ")");
+            System.out.println("Feedback:\n" + feedback);
+            System.out.println("------------------------------------------");
         }
     }
 }

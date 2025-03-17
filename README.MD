@@ -1,41 +1,68 @@
-# Password Factory  
+# Password Factory
 
 Jordan Bassett  
 Lizbeth Garcia-Lopez  
 CS236 - Advanced OOP (Java 2)  
 Final Project: Strong Password Creation Game for Kids  
-Updated circa February 16, 2025
+Last Updated: March 16, 2025
 
-## Specs
-Java: 23.0.2
-Apache NetBeans IDE 24
-JavaFX 23
-Java with Maven, Simple JavaFX Maven Archetype
+---
 
-## Overview
-Password Factory is a Java-based educational game designed to teach kids how to create **strong passwords**.  
-Players work in a "password factory," assembling secure passwords under **time pressure** while avoiding weak patterns.  
+## 📚 Overview
+**Password Factory** is an educational game developed in JavaFX to teach kids (and anyone!) how to create strong passwords.  
+Players work in a virtual "password factory," building secure passwords under time pressure while learning about password strength through real-time feedback.
 
-## Project Requirements  
-This project is part of **CS236 Advanced OOP (Java 2)** and follows these requirements:  
-- Uses **inheritance and interfaces** for class design.  
-- Implements a **password validation algorithm**.  
-- Uses **file processing or databases** to store user-generated passwords.  
-- Features a **Graphical User Interface (GUI)**.  
-- Includes a **main method for testing** the logic separately from the UI.  
+---
 
-## Features
-- **Game Mode**: Players earn points based on password strength.  
-- **Password Lab**: A separate mode where users can test passwords freely.  
-- **Scoring System**: Weak, Moderate, and Strong ratings based on password complexity.  
-- **Algorithm**: Password strength is calculated using length, character variety, and common word checks.  
+## ✅ Project Requirements & Features
+This project was developed for **CS236 - Advanced OOP (Java 2)** and meets the following requirements:
 
-## How to Run the Project
+- **Object-Oriented Design**
+  - Inheritance (`PasswordComponent` → `PasswordValidator`)
+  - Interfaces (`PasswordChecker`)
+  - Polymorphism in password validation logic
+
+- **Password Strength Algorithm**
+  - Based on length, character variety, and detection of common words
+  - Adjustable difficulty settings (Easy, Medium, Hard)
+  - Dynamic hint generation for improving password strength
+
+- **File Handling**
+  - Loads and saves `common_words.txt` and `phrases.txt`
+  - Logs passwords and their strength in `password_log.txt`
+
+- **Graphical User Interface (JavaFX)**
+  - **Password Factory Game**: Timed challenge to generate strong passwords
+  - **Password Lab**: Sandbox environment for testing passwords and editing phrases/words
+  - **About Screen**: Displays system info (Java & JavaFX versions)
+
+- **Testing & Console Apps**
+  - `PasswordValidatorTest.java` for unit testing password evaluation logic
+  - `PasswordFactoryConsole.java` for early console-based password generation and file handling testing
+
+---
+
+## ⚙️ Specifications & Tools
+- **Java Version**: 17+ (Developed on OpenJDK 23.0.2)
+- **JavaFX Version**: 20+
+- **IDE**: Apache NetBeans IDE 24
+- **Build Tool**: Maven (Simple JavaFX Maven Archetype)
+
+---
+
+## 🚀 How to Run Password Factory
+
 ### Prerequisites
-- Java 17+  
-- NetBeans (or any Java IDE)  
+- Java 17 or later
+- JavaFX SDK 20 or later
+- Maven (optional if running inside NetBeans)
 
-### Running the Game
-  https://github.com/Flareprime/PasswordFactory
-   run App.java
-   or run PaswordValidatorTest.java for ... the tests
+### Running in NetBeans (Recommended)
+1. Open the project in NetBeans (`pom.xml` is at root).
+2. Clean and Build the project.
+3. Run `App.java` (Main Menu).
+4. Optionally, run `PasswordValidatorTest.java` for validation tests.
+
+### Running from Maven
+```bash
+mvn clean javafx:run

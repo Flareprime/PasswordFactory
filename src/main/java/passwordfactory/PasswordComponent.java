@@ -1,36 +1,59 @@
-/*  Lizbeth Garcia-Lopez & Jordan Bassett    
-    Password Factory
-    CS236 - Advanced OOP (Java 2)
-    Final Project: Strong Password Creation Game for Kids
-    Updated circa February 17, 2025
-    Desc: This is an abstract superclass for password-related stuff. 
-    It enforces password validation rules while allowing subclasses to use 
-    specific password validation logic.
+/* Password Factory Project
+ CS236 - Advanced OOP (Java 2)
+ Class: PasswordComponent.java
+ Author(s): Lizbeth Garcia-Lopez & Jordan Bassett
+ Last Updated: March 16, 2025
+ 
+ Description:
+    This is an abstract superclass for password-related validation logic.
+    It enforces password validation rules while allowing subclasses to imlement
+    specific validation and feedback logic.
 
-    - Implements the PasswordChecker interface
-    - Defines an abstract method for evaluating password strength
-    - Defines an abstract method for generating password feedbac.
-    - Provides a helper method to check if a password contains common weak words
+ Features:
+    - Implements the PasswordChecker interface.
+    - Defines abstract methods for evaluating password strength and generating feedback.
+    - Provides a shared utility method to check if a password contains common weak words.
 
+ Dependencies:
     - Superclass for: PasswordValidator.java
-    - Implements: PasswordChecker.java
-*/
+    - Implements: PasswordChecker.java  */
 package passwordfactory;
-public abstract class PasswordComponent implements PasswordChecker {
 
-    // Abstract method for checking password strength (must be implemented by subclasses)
+//Abstract superclass for password validation logic.
+public abstract class PasswordComponent implements PasswordChecker
+{
+    /**
+     Abstract method for checking password strength
+     Must be implemented by subclasses
+          @param password The password to evaluate.
+     @return Strength level as an integer:
+             0 = Weak
+             1 = Moderate
+             2 = Strong
+     */
     @Override
     public abstract int checkStrength(String password);
 
-    // Abstract method for providing feedback (must be implemented by subclasses)
+    /**
+     * Abstract method for providing feedback about a password.
+     * Must be implemented by subclasses
+     * @param password The password to analyze
+     * @return A feedback message with suggestions for improvement.     */
     @Override
     public abstract String giveFeedback(String password);
 
-    //shared utility method
+    /**
+     * Helper method to check if the given password contains a common weak word
+     * @param password The password to check
+     * @param commonWords array of common weak words
+     * @return True if the password contains a common word, false otherwise
+     */
     protected boolean containsCommonWord(String password, String[] commonWords)
     {
-        for (String word : commonWords) {
-            if (password.toLowerCase().contains(word.toLowerCase())) {
+        for (String word : commonWords)
+        {
+            if (password.toLowerCase().contains(word.toLowerCase()))
+            {
                 return true; // Password contains a weak common word
             }
         }

@@ -1,97 +1,117 @@
-/*  Jordan Bassett & Lizbeth Garcia-Lopez
-    Password Factory
-    CS236 - Advanced OOP (Java 2)
-    Final Project: Strong Password Creation Game for Kids
-    Updated circa February 17, 2025
-    Desc:     This is a console-based version of the Password Factory game, designed as an alternative 
-    to the GUI implementation, mostly for testing purposes
-    Users can assemble a password by selecting a phrase, 
-    number, and special character, then evaluates its strength.
+/* Password Factory Project
+ CS236 - Advanced OOP (Java 2)
+ Class: PasswordFactoryConsole.java
+ Author(s): Jordan Bassett & Lizbeth Garcia-Lopez
+ Last Updated: March 16, 2025
+ 
+ Description:
+    Early development console application for testing password generation and validation
+    Allows users to select phrases, numbers, and special characters to assemble a password
+    Evaluates password strength using PasswordValidator and saves the result to a file
+    Runs on its own
 
-    - Displays a list of phrases for the user to choose from.
-    - Allows selection of a number (0-9) and a special character.
-    - Generates a password using the selected components.
-    - Evaluates password strength using PasswordValidator.
-    - Saves the generated password to a file (selected_phrases.txt).
+ Features:
+    - Console-based user input for selecting components of a password.
+    - Assembles a password from phrases, numbers, and symbols.
+    - Validates the password using PasswordValidator.
+    - Saves the password and its strength evaluation to a file (pwd_output.txt).
 
-    - Runs independently from the GUI version (App.java).
-    - Uses PasswordValidator.java for strength checking.
-    - Writes to a file for storage.
+ Dependencies:
+    - Uses: PasswordValidator.java
+    - Writes output to: pwd_output.txt */
 
-    Usage: Run this file, it has a main()
-*/
 package passwordfactory;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class PasswordFactoryConsole {
-    // Sample phrases
-    private static final String[] PHRASES = {
-        "I miss my two cats",
-        "Star Wars is the best movie",
-        "Protect your online accounts",
-        "A white barn is pretty"
-    };
-
-    // Special characters
+public class PasswordFactoryConsole
+{
+    //Sample phrase options for the console version
+    private static final String[] PHRASES = {"sunshine", "rainbow", "monkey", "dragon", "coffee"};
+    
+    //Special characters that can be added to the password
     private static final String[] SPECIAL_CHARS = {"!", "@", "#", "$", "%", "&", "*"};
 
+    /**
+     * Main method for running the console application
+     * Guides the user through creating a password and validates it
+     * @param args Command-line arguments (not used)
+     */
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
+        StringBuilder passwordBuilder = new StringBuilder();
 
-        System.out.println("===== Password Helper Mode =====");
-        System.out.println("Select a phrase:");
-
-        //Display phrases
-        for (int i = 0; i < PHRASES.length; i++) {
+        System.out.println("Welcome to Password Factory Console Edition!");
+        
+        //Phrase selection
+        System.out.println("Choose a phrase:");
+        for (int i = 0; i < PHRASES.length; i++)
+        {
             System.out.println((i + 1) + ". " + PHRASES[i]);
         }
 
-        // Get phrase selection
-        System.out.print("Enter choice (1-" + PHRASES.length + "): ");
         int phraseChoice = scanner.nextInt();
-        scanner.nextLine(); // eat newline
-        if (phraseChoice < 1 || phraseChoice > PHRASES.length)
+        scanner.nextLine(); // consume newline
+
+        if (phraseChoice >= 1 && phraseChoice <= PHRASES.length)
         {
-            System.out.println("Invalid choice. Exiting.");
+            passwordBuilder.append(PHRASES[phraseChoice - 1]);
+        }
+        else
+        {
+            System.out.println("Invalid choice. Exiting...");
             return;
         }
-        String selectedPhrase = PHRASES[phraseChoice - 1].replaceAll("\\s", ""); //Remove spaces
 
-        //get number selection
-        System.out.print("Enter a number (0-9): ");
-        int numberChoice = scanner.nextInt();
-        scanner.nextLine();
+        // Number input
+        System.out.println("Enter a number to add:");
+        String number = scanner.nextLine();
+        passwordBuilder.append(number);
 
-        //Display special characters
-        System.out.println("Select a special character:");
-        for (int i = 0; i < SPECIAL_CHARS.length; i++) {
+        //special character selection
+        System.out.println("Choose a special character:");
+        for (int i = 0; i < SPECIAL_CHARS.length; i++)
+        {
             System.out.println((i + 1) + ". " + SPECIAL_CHARS[i]);
         }
-        System.out.print("Enter choice (1-" + SPECIAL_CHARS.length + "): ");
-        int specialChoice = scanner.nextInt();
-        scanner.nextLine();
-        if (specialChoice < 1 || specialChoice > SPECIAL_CHARS.length)
+
+        int charChoice = scanner.nextInt();
+
+        if (charChoice >= 1 && charChoice <= SPECIAL_CHARS.length)
         {
-            System.out.println("Invalid choice. Exiting.");
+            passwordBuilder.append(SPECIAL_CHARS[charChoice - 1]);
+        }
+        else
+        {
+            System.out.println("Invalid choice. Exiting...");
             return;
         }
-        String selectedSpecialChar = SPECIAL_CHARS[specialChoice - 1];
 
-        //Generate password
-        String generatedPassword = selectedPhrase + numberChoice + selectedSpecialChar;
-        System.out.println("\nGenerated Password: " + generatedPassword);
+        String finalPassword = passwordBuilder.toString();
 
-        //Save to file (Phase 3 requirement)
-        try (FileWriter writer = new FileWriter("pwd_output.txt", true))
+        //Validate the password
+        PasswordFileManager fileManager = new PasswordFileManager("phrases.txt", "password_log.txt");
+        PasswordValidator validator = new PasswordValidator(fileManager, "easy");
+
+        int strength = validator.checkStrength(finalPassword);
+        String strengthLabel = (strength == 2) ? "Strong" : (strength == 1) ? "Moderate" : "Weak";
+
+        // Display result
+        System.out.println("Generated Password: " + finalPassword);
+        System.out.println("Password Strength: " + strengthLabel);
+
+        // Save the password and strength to a file
+        try (PrintWriter writer = new PrintWriter(new FileWriter("pwd_output.txt", true)))
         {
-            writer.write(selectedPhrase + "," + numberChoice + "," + selectedSpecialChar + "\n");
-            System.out.println("Password saved to file.");
+            writer.println(finalPassword + " - " + strengthLabel);
+            System.out.println("Password saved to pwd_output.txt");
         }
-        catch (IOException e){
-            System.out.println("Error saving password.");
+        catch (IOException e)
+        {
+            System.out.println("Error saving password to file: " + e.getMessage());
         }
 
         scanner.close();

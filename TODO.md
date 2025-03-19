@@ -28,5 +28,4 @@ The current version fulfills all assignment requirements as of March 18, 2025.
 
 ## 📝 Notes
 
-- Passwords are logged in plaintext for educational demonstration only
 - Code demonstrates CS236 principles: inheritance, polymorphism, file handling, and JavaFX GUI

@@ -36,32 +36,32 @@ public class PasswordGame
 {
  // Class variables
     private String difficulty;    //difficulty level selected (Easy, Medium, Hard)
-    private Scene gameScene;      //Main scene for the game window
+    private final Scene gameScene;      //Main scene for the game window
     private Stage gameStage;      // Game window stage
 
-    private int roundTime;            //Total time for the round, based on difficulty
+    private final int roundTime;            //Total time for the round, based on difficulty
     private int timeLeft;             //Countdown timer for the current round
     private int score = 0;            //player score, based on password strength
     private int passwordsSubmitted = 0;  // Number of passwords submitted this round
 
     // UI Labels for displaying game status
-    private Label timerLabel;         //Displays time left in the round
-    private Label scoreLabel;         //Displays current score
+    private final Label timerLabel;         //Displays time left in the round
+    private final Label scoreLabel;         //Displays current score
     private Label resultLabel;        //Displays strength feedback for the last password
-    private Label hintLabel;          //Displays hints for improving the password
+    private final Label hintLabel;          //Displays hints for improving the password
 
     private Timeline timer;     // Timer for the countdown (JavaFX Timeline)
 
     //User input and output components
     private TextField passwordEntryField;         //Field where user types passwords
-    private ListView<String> passwordHistoryView;  //Shows passwords submitted in this round
+    private final ListView<String> passwordHistoryView;  //Shows passwords submitted in this round
     private ListView<String> phraseListView;       //Displays helpful phrases to add to passwords
 
-    //Random number generator (currently unused but available for future features)
-    private Random random = new Random();
+    //Random number generator (currently unused)
+    //private Random random = new Random();
 
     //Core components
-    private PasswordChecker passwordChecker;      //Password strength evaluator (PasswordValidator)
+    private final PasswordChecker passwordChecker;   //Password strength evaluator (PasswordValidator)
     private PasswordFileManager fileManager;      //Manages phrase/common word files and password logs
 
 
@@ -89,10 +89,9 @@ public class PasswordGame
             default:
                 roundTime = 60;
         }
-
         this.timeLeft = roundTime;
 
-        // Initialize file manager and password validator
+        //Initialize file manager and password validator
         fileManager = new PasswordFileManager("phrases.txt", "password_log.txt");
         fileManager.initPasswordLog();
 
@@ -110,7 +109,7 @@ public class PasswordGame
         Button submitButton = new Button("Submit Password");
         submitButton.setOnAction(e -> submitPassword());
 
-        // labels for displaying hints, timer, score, and result feedback
+        //labels for displaying hints, timer, score, and result feedback
         hintLabel = new Label("Hints will appear here as you type.");
         hintLabel.setWrapText(true);
         hintLabel.setMaxWidth(400);
@@ -227,10 +226,8 @@ public class PasswordGame
         timer.play();
     }
 
-    /**
-     * Handles password submission, evaluates strength, updates score,
-     * and logs the password with its feedback.
-     */
+    /* Handles password submission, evaluates strength, updates score,
+      and logs the password with its feedback.    */
     private void submitPassword()
     {
         String password = passwordEntryField.getText();

@@ -63,6 +63,3 @@ This project was developed for **CS236 - Advanced OOP (Java 2)** and meets the f
 3. Run `App.java` (Main Menu).
 4. Optionally, run `PasswordValidatorTest.java` for validation tests.
 
-### Running from Maven
-```bash
-mvn clean javafx:run

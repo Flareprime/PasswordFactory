@@ -24,7 +24,7 @@
   
     <build>
 <plugins>
-    <!-- Compiler plugin (already there) -->
+    <!-- Compiler plugin -->
     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -44,7 +44,7 @@
         </configuration>
     </plugin>
 
-    <!-- ✅ New: Maven JAR plugin to make an executable JAR -->
+    <!-- Maven JAR plugin to make an executable JAR -->
     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>

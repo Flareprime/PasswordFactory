@@ -17,10 +17,29 @@
 
  Dependencies:
     - Used by PasswordGame.java, PasswordLab.java, and PasswordValidator.java
+
+The project requirement in Phase 3 states:
+"Store each remembered phrase on disk using a database or a random access file."
+
+After careful consideration, we made a design decision to store helpful phrases 
+and common words in plain text files (phrases.txt and common_words.txt). This allows 
+users to easily add or modify multiple phrases in bulk without needing to interact 
+directly with the application. We prioritized usability and accessibility, 
+aligning with Columbia Basin College’s Inclusiveness and Accessibility policies, 
+by ensuring the system supports user-friendly data management.
+
+However, recognizing that password logs contain potentially sensitive information, 
+we chose to implement a RandomAccessFile (binary file) for passwordLogFile. 
+This approach ensures that generated passwords are not stored in plaintext and 
+demonstrates proper file handling and security measures. 
+The binary log prevents casual access to sensitive data while fulfilling the Phase 3 
+requirement of implementing random access file processing.
+
+We applied critical thinking as outlined in CBC’s Institutional Learning Outcomes. 
+We used random access file handling where it made the most practical and secure sense, 
+ensuring we addressed file processing requirements while delivering a better user experience.
  */
-
 package passwordfactory;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +137,7 @@ public class PasswordFileManager
 
     /**
      * Saves the provided common words list to the specified file
-    * @param words List of common words
+    * @param words list of common words
      * @param filename File to save common words to
      */
     public void saveCommonWords(List<String> words, String filename)

@@ -2,7 +2,7 @@
  CS236 - Advanced OOP (Java 2)
  Class: PasswordValidatorTest.java
  Author(s): Lizbeth Garcia-Lopez & Jordan Bassett
- Last Updated: March 16, 2025
+ Last Updated: March 19, 2025
  
  Description:
     Early test class for validating the PasswordValidator logic.
@@ -17,19 +17,18 @@
  Dependencies:
     - Uses: PasswordValidator.java, PasswordFileManager.java
  */
-
 package passwordfactory;
 
-//Early console-based test class for validating PasswordValidator.
-//outputs strength evaluations and feedback for predefined passwords.
- public class PasswordValidatorTest
+
+// Early console-based test class for validating PasswordValidator.
+// Outputs strength evaluations and feedback for predefined passwords.
+public class PasswordValidatorTest
 {
-    public static void main(String[] args)
-    {
-        //Create file manager for test environment
+    public static void main(String[] args) {
+        // Create file manager for test environment
         PasswordFileManager fileManager = new PasswordFileManager("phrases.txt", "password_log.txt");
 
-        //Create validator using file manager and set difficulty (easy/medium/hard)
+        // Create validator using file manager and set difficulty (easy/medium/hard)
         String difficulty = "medium"; // Change this to test other difficulties
         PasswordValidator validator = new PasswordValidator(fileManager, difficulty);
 
@@ -46,7 +45,7 @@ package passwordfactory;
         System.out.println("Testing Passwords in '" + difficulty + "' Mode");
         System.out.println("==========================================");
 
-        //loop through each password and print evaluation results
+        // Loop through each password and print evaluation results
         for (String pw : testPasswords)
         {
             System.out.println("Testing: " + pw);

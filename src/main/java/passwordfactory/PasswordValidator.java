@@ -6,7 +6,8 @@
  
  Description:
     Validates password strength and provides feedback
-    Implements difficulty scaling, detects common words, and offers hints for improvement.
+    Implements difficulty scaling, detects common words, and offers hints for improvement
+	extends PasswordComponent (inheritance) and uses HintManager and PasswordFileManager
 
  Features:
     - Evaluates password strength based on length, character variety, and common word usage
